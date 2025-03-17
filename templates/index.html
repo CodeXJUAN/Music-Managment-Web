@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Gestor de Tasques</title> 
+</head>
+<body> 
+    <h1>Llista de Tasques</h1> 
+    <ul> 
+        {% for tasca in tasques %} 
+            <li> 
+                {{ tasca.titol }} - {% if tasca.completada %} ✅ {% else %} ❌ {% endif %} 
+                <form action="/tasques/{{ tasca.titol }}/completar" method="post" style="display:inline;"> 
+                    <button type="submit">Completar</button> 
+                </form> 
+                <form action="/tasques/{{ tasca.titol }}/eliminar" method="post" style="display:inline;"> 
+                    <button type="submit">Eliminar</button> 
+                </form> 
+            </li> 
+        {% endfor %} 
+    </ul> 
+    <h2>Afegir una nova tasca</h2> 
+    <form action="/tasques" method="post"> 
+        <input type="text" name="titol" placeholder="Títol" required> 
+        <input type="text" name="descripcio" placeholder="Descripció"> 
+        <button type="submit">Afegir</button> 
+    </form> 
+</body> 
+</html> 

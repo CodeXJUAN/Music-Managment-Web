@@ -10,12 +10,15 @@ load_dotenv()
 
 USER = os.getenv("USER")
 PASSWORD = os.getenv("PASSWORD")
-MONGO_URI = f"mongodb+srv://{USER}:{PASSWORD}@mongodb.s4hmk.mongodb.net/?retryWrites=true&w=majority&appName=MongoDB"
+CLUSTERNAME= os.getenv("CLUSTERNAME")
+DBNAME= os.getenv("DATABASE")
+
+MONGO_URI = f"mongodb+srv://{USER}:{PASSWORD}@mongodb.s4hmk.mongodb.net/?retryWrites=true&w=majority&appName={CLUSTERNAME}"
 
 
 client = MongoClient(MONGO_URI) 
 
-db = client["DBNAME"] 
+db = client[f"{DBNAME}"] 
 
 def obtenir_tasques(): 
     return list(db.tasques.find({}, {"_id": 0})) 
