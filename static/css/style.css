@@ -1,0 +1,203 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    flex-wrap: wrap;
+}
+
+.left, .right {
+    width: 45%;
+}
+
+.ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card_Foto {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card_Info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.foto {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.divButons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.ulInfo {
+    list-style-type: none;
+    padding: 0;
+}
+
+.liInfo {   
+    margin-top: 10px;
+}
+
+.li {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(45% - 20px); /* Ajusta el ancho para que quepan 2 tarjetas por fila */
+    margin: 0;
+}
+
+form {
+    margin: 0;
+}
+
+button {
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #2e2e2e;
+}
+
+input[type="text"], input[type="number"], input[type="url"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: calc(100% - 22px);
+}
+
+form[action="/Musics"] {
+    background-color: #fff;
+    padding: 30px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 80%; 
+    height: 325px;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .left, .right {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .card_Foto{
+        align-items: center;
+        text-align: center;
+        padding: 10px;   
+    }
+
+    .card_Info {
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .foto {
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .li {
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .divButons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    form[action="/Musics"] {
+        width: 90%;
+        height: auto;
+        padding: 15px;
+    }
+
+    input[type="text"], 
+    input[type="number"], 
+    input[type="url"] {
+        width: calc(100% - 20px);
+        margin: 8px 0;
+    }
+
+    button {
+        width: 100%;
+        margin: 8px 0;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+}

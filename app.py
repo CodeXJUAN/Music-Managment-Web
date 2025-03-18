@@ -1,55 +1,52 @@
-from flask import Flask, request, render_template, redirect, url_for 
-
-from pymongo import MongoClient 
+from flask import Flask, request, render_template, redirect, url_for
+from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
 load_dotenv()
 
 USER = os.getenv("USER")
 PASSWORD = os.getenv("PASSWORD")
-CLUSTERNAME= os.getenv("CLUSTERNAME")
-DBNAME= os.getenv("DATABASE")
+CLUSTERNAME = os.getenv("CLUSTERNAME")
+DBNAME = os.getenv("DATABASE")
 
 MONGO_URI = f"mongodb+srv://{USER}:{PASSWORD}@mongodb.s4hmk.mongodb.net/?retryWrites=true&w=majority&appName={CLUSTERNAME}"
 
+client = MongoClient(MONGO_URI)
 
-client = MongoClient(MONGO_URI) 
+db = client[f"{DBNAME}"]
 
-db = client[f"{DBNAME}"] 
+def obtener_music():
+    return list(db.Musics.find({}, {"_id": 0}))
 
-def obtenir_tasques(): 
-    return list(db.tasques.find({}, {"_id": 0})) 
+@app.route('/')
+def home():
+    return render_template("index.html", Musics=obtener_music())
 
-@app.route('/') 
+@app.route('/Musics', methods=['POST'])
+def añadir_music():
+    music = {
+        "titulo": request.form['titulo'],
+        "artista": request.form.get('artista', ''),
+        "ano": request.form.get('ano', ''),
+        "album": request.form.get('album', ''),
+        "foto": request.form.get('foto', ''),
+        "completada": False
+    }
+    db.Musics.insert_one(music)
+    return redirect(url_for('home'))
 
-def home(): 
-    return render_template("index.html", tasques=obtenir_tasques()) 
+@app.route('/Musics/<titulo>/completar', methods=['POST'])
+def completar_music(titulo):
+    db.Musics.update_one({"titulo": titulo}, {"$set": {"completada": True}})
+    return redirect(url_for('home'))
 
-@app.route('/tasques', methods=['POST']) 
+@app.route('/Musics/<titulo>/eliminar', methods=['POST'])
+def eliminar_music(titulo):
+    db.Musics.delete_one({"titulo": titulo})
+    return redirect(url_for('home'))
 
-def afegir_tasca(): 
-    tasca = { 
-        "titol": request.form['titol'], 
-        "descripcio": request.form.get('descripcio', ''), 
-        "completada": False 
-    } 
-    db.tasques.insert_one(tasca) 
-    return redirect(url_for('home')) 
-
-@app.route('/tasques/<titol>/completar', methods=['POST']) 
-
-def completar_tasca(titol): 
-    db.tasques.update_one({"titol": titol}, {"$set": {"completada": True}}) 
-    return redirect(url_for('home')) 
-
-@app.route('/tasques/<titol>/eliminar', methods=['POST']) 
-
-def eliminar_tasca(titol): 
-    db.tasques.delete_one({"titol": titol}) 
-    return redirect(url_for('home')) 
-
-if __name__ == '__main__': 
-    app.run(debug=True) 
+if __name__ == '__main__':
+    app.run(debug=True)
