@@ -38,9 +38,14 @@ def añadir_music():
     db.Musics.insert_one(music)
     return redirect(url_for('home'))
 
-@app.route('/Musics/<titulo>/completar', methods=['POST'])
-def completar_music(titulo):
-    db.Musics.update_one({"titulo": titulo}, {"$set": {"completada": True}})
+@app.route('/Musics/<titulo>/favorito', methods=['POST'])
+def favorito_music(titulo):
+    db.Musics.update_one({"titulo": titulo}, {"$set": {"enFavorito": True}})
+    return redirect(url_for('home'))
+
+@app.route('/Musics/<titulo>/nofavorito', methods=['POST'])
+def nofavorito_music(titulo):
+    db.Musics.update_one({"titulo": titulo}, {"$set": {"enFavorito": False}})
     return redirect(url_for('home'))
 
 @app.route('/Musics/<titulo>/eliminar', methods=['POST'])

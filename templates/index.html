@@ -7,59 +7,112 @@
     <title>Gestor de Música</title>
 </head>
 <body>
-    <div class="wave">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <h1>Gestor de Música</h1>
-      <div class="container">
-            <div class="left">
-                <h2>Añadir una nueva canción</h2>
-                <form action="/Musics" method="post">
-                    <input type="text" name="titulo" placeholder="Título" required>
-                    <input type="text" name="artista" placeholder="Artista" required>
-                    <input type="number" name="ano" placeholder="Año" required>
-                    <input type="text" name="album" placeholder="Álbum" required>
-                    <input type="url" name="foto" placeholder="URL de la foto del álbum" required>
-                    <button type="submit">Afegir</button>
-                </form>
-            </div>
-            <div class="right">
-                <h2>Lista de Canciones</h2>
-                <ul class="ul">
-                    {% for music in Musics %}
-                        <li class="li">
-                            <div class="card">
-                                <div class="card_Foto">
-                                    <img src="{{ music.foto }}" alt="Foto del álbum" class="foto">
-                                </div>
-                                <div class="card_Info">
-                                    <ul class="ulInfo">
-                                        <div>
-                                            <li class="liInfo">{{ music.titulo }} - {{ music.artista }}</li>                         
-                                        </div>
-                                        <div>
-                                            <li class="liInfo">{{ music.album }} - {{ music.ano }}</li>
-                                        </div>
-                                    </ul>
+    <h1>Gestor de Música</h1>
+    <div class="container">
+        <div class="left">
+            <h2>Añadir una nueva canción</h2>
+            <form action="/Musics" method="post">
+                <input type="text" name="titulo" placeholder="Título" required>
+                <input type="text" name="artista" placeholder="Artista" required>
+                <input type="number" name="ano" placeholder="Año" required>
+                <input type="text" name="album" placeholder="Álbum" required>
+                <input type="url" name="foto" placeholder="URL de la foto del álbum" required>
+                <button type="submit">Afegir</button>
+            </form>
+        </div>
+        <div class="right">
+            <h2>Lista de Canciones</h2>
+            <ul class="ul">
+                {% for music in Musics if music.enFavorito %}
+                    <li class="li">
+                        <div class="card">
+                            <div class="fav">
+                                {% if not music.enFavorito %}
+                                    -
+                                {% else %}
+                                    ⭐
+                                {% endif %}
+                            </div>
+                            <div class="card_Foto">
+                                <img src="{{ music.foto }}" alt="Foto del álbum" class="foto">
+                            </div>
+                            <div class="card_Info">
+                                <ul class="ulInfo">
                                     <div>
-                                        <p>Completada: {% if music.completada %} ✅ {% else %} ❌ {% endif %}</p> 
+                                        <li class="liInfo">{{ music.titulo }} - {{ music.artista }}</li>                         
                                     </div>
-                                    <div class="divButons">
-                                        <form action="/Musics/{{ music.titulo }}/completar" method="post" style="display:inline;">
-                                            <button type="submit">Completar</button>
-                                        </form>
-                                        <form action="/Musics/{{ music.titulo }}/eliminar" method="post" style="display:inline;">
-                                            <button type="submit">Eliminar</button>
-                                        </form>
+                                    <div>
+                                        <li class="liInfo">{{ music.album }} - {{ music.ano }}</li>
                                     </div>
+                                </ul>
+                                <div class="divButons">
+                                    {% if not music.enFavorito %}
+                                    <form action="/Musics/{{ music.titulo }}/favorito" method="post" style="display:inline;">
+                                        <button type="submit" class="favorite-btn">
+                                            ☆ Favorito
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                    <form action="/Musics/{{ music.titulo }}/nofavorito" method="post" style="display:inline;">
+                                        <button type="submit" class="favorite-btn active">
+                                            ★ Quitar Favorito
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                    <form action="/Musics/{{ music.titulo }}/eliminar" method="post" style="display:inline;">
+                                        <button type="submit">Eliminar</button>
+                                    </form>
                                 </div>
                             </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                {% for music in Musics if not music.enFavorito %}
+                    <li class="li">
+                        <div class="card">
+                            <div class="fav">
+                                {% if not music.enFavorito %}
+                                    -
+                                {% else %}
+                                    ⭐
+                                {% endif %}
+                            </div>
+                            <div class="card_Foto">
+                                <img src="{{ music.foto }}" alt="Foto del álbum" class="foto">
+                            </div>
+                            <div class="card_Info">
+                                <ul class="ulInfo">
+                                    <div>
+                                        <li class="liInfo">{{ music.titulo }} - {{ music.artista }}</li>                         
+                                    </div>
+                                    <div>
+                                        <li class="liInfo">{{ music.album }} - {{ music.ano }}</li>
+                                    </div>
+                                </ul>
+                                <div class="divButons">
+                                    {% if not music.enFavorito %}
+                                    <form action="/Musics/{{ music.titulo }}/favorito" method="post" style="display:inline;">
+                                        <button type="submit" class="favorite-btn">
+                                            ☆ Favorito
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                    <form action="/Musics/{{ music.titulo }}/nofavorito" method="post" style="display:inline;">
+                                        <button type="submit" class="favorite-btn active">
+                                            ★ Quitar Favorito
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                    <form action="/Musics/{{ music.titulo }}/eliminar" method="post" style="display:inline;">
+                                        <button type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
+    </div>
 </body>
 </html>
