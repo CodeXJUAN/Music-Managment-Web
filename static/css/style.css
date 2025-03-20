@@ -1,11 +1,14 @@
 body {
+    height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #e5e5f7;
+    background-image: radial-gradient(#14164a 0.5px, #efefef 0.5px);
+    background-size: 10px 10px;
 }
 
 h1, h2 {
@@ -110,6 +113,8 @@ input[type="text"], input[type="number"], input[type="url"] {
     border-radius: 3px;
     width: calc(100% - 22px);
 }
+
+
 
 form[action="/Musics"] {
     background-color: #fff;

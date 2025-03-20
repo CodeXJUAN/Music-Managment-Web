@@ -7,16 +7,16 @@ app = Flask(__name__)
 
 load_dotenv()
 
-USER = os.getenv("USER")
-PASSWORD = os.getenv("PASSWORD")
-CLUSTERNAME = os.getenv("CLUSTERNAME")
-DBNAME = os.getenv("DATABASE")
+USUARIO = os.getenv("USUARIO")
+CONTRASENA = os.getenv("CONTRASENA")
+NOMBRE_CLUSTER = os.getenv("NOMBRE_CLUSTER")
+NOMBRE_DB = os.getenv("NOMBRE_DB")
 
-MONGO_URI = f"mongodb+srv://{USER}:{PASSWORD}@mongodb.s4hmk.mongodb.net/?retryWrites=true&w=majority&appName={CLUSTERNAME}"
+MONGO_URI = f"mongodb+srv://{USUARIO}:{CONTRASENA}@mongodb.s4hmk.mongodb.net/?retryWrites=true&w=majority&appName={NOMBRE_CLUSTER}"
 
 client = MongoClient(MONGO_URI)
 
-db = client[f"{DBNAME}"]
+db = client[f"{NOMBRE_DB}"]
 
 def obtener_music():
     return list(db.Musics.find({}, {"_id": 0}))
