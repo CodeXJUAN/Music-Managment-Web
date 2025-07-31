@@ -11,7 +11,8 @@ body {
     background-size: 10px 10px;
 }
 
-h1, h2 {
+h1,
+h2 {
     color: #333;
 }
 
@@ -22,7 +23,8 @@ h1, h2 {
     flex-wrap: wrap;
 }
 
-.left, .right {
+.left,
+.right {
     width: 45%;
 }
 
@@ -81,7 +83,7 @@ h1, h2 {
     padding: 0;
 }
 
-.liInfo {   
+.liInfo {
     margin-top: 10px;
 }
 
@@ -93,7 +95,9 @@ h1, h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(45% - 20px); /* Ajusta el ancho para que quepan 2 tarjetas por fila */
+    width: calc(
+        45% - 20px
+    ); /* Ajusta el ancho para que quepan 2 tarjetas por fila */
     margin: 0;
 }
 
@@ -115,7 +119,9 @@ button:hover {
     background-color: #2e2e2e;
 }
 
-input[type="text"], input[type="number"], input[type="url"] {
+input[type="text"],
+input[type="number"],
+input[type="url"] {
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -123,15 +129,13 @@ input[type="text"], input[type="number"], input[type="url"] {
     width: calc(100% - 22px);
 }
 
-
-
 form[action="/Musics"] {
     background-color: #fff;
     padding: 30px 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    width: 80%; 
+    width: 80%;
     height: 325px;
 }
 
@@ -147,7 +151,8 @@ form[action="/Musics"] {
         margin: 0 auto;
     }
 
-    .left, .right {
+    .left,
+    .right {
         width: 90%;
         margin-bottom: 20px;
     }
@@ -157,10 +162,10 @@ form[action="/Musics"] {
         margin: 10px 0;
     }
 
-    .card_Foto{
+    .card_Foto {
         align-items: center;
         text-align: center;
-        padding: 10px;   
+        padding: 10px;
     }
 
     .card_Info {
@@ -194,8 +199,8 @@ form[action="/Musics"] {
         padding: 15px;
     }
 
-    input[type="text"], 
-    input[type="number"], 
+    input[type="text"],
+    input[type="number"],
     input[type="url"] {
         width: calc(100% - 20px);
         margin: 8px 0;
